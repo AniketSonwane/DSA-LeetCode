@@ -1,0 +1,6 @@
+class Solution {
+public:
+    vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
+        int n = nums.size(); vector<pair<int, int>> v(n); for (int i = 0; i < n; i++) { v[i] = {nums[i], i}; } sort(v.begin(), v.end()); for (int i = 0; i < n; ) { int j = i; while (j + 1 < n && v[j + 1].first - v[j].first <= limit) j++; vector<int> index(j - i + 1); for (int k = i; k <= j; k++) index[k - i] = v[k].second; sort(index.begin(), index.end()); for (int k = 0; k < index.size(); k++) nums[index[k]] = v[i + k].first; i = j + 1; } return nums;
+    }
+};
